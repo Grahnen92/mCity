@@ -16,10 +16,13 @@ class gObject {
 		char getOtype();
 
 		void getPosition(glm::vec3& _Position);
-		float* getPosition();
+		float* getPositionF();
+		glm::vec3* getPositionV();
 		void setPosition(glm::vec3* _Position);
 
-		float* getTransform();
+		float* getTransformF();
+		glm::mat4* getTransformM();
+
 		void setRotation(glm::mat3* _Rotation);
 		void render();
 

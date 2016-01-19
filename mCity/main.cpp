@@ -45,14 +45,14 @@ int main(){
 
 	MatrixStack MVstack; MVstack.init();
 
-	Sphere testSphere(0.0f, 0.0f, -1.0f, 0.1f);
+	Sphere testSphere(0.5f, 0.0f, -0.5f, 0.1f);
 	Sphere lightOne(0.5f, 0.5f, -2.0f, 0.1f);
 	//TODO: do this properly
 	glm::vec4 LP = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);// glm::vec4(lightOne.getPosition()[0], lightOne.getPosition()[1], lightOne.getPosition()[2], 1.0f);
 	glm::mat4 lightT = glm::mat4(1.0f);
 	
 	Camera mCamera;
-	mCamera.setPosition(&glm::vec3(0.0f, 0.0f, -2.0f));
+	mCamera.setPosition(&glm::vec3(0.0f, 0.0f, -1.0f));
 
 	while (!glfwWindowShouldClose(currentWindow))
 	{
@@ -68,10 +68,11 @@ int main(){
 			glUniformMatrix4fv(locationP, 1, GL_FALSE, mCamera.getPerspective());
 
 			//glm::transpose(cameraT);
-			MVstack.multiply(mCamera.getTransform());
+			MVstack.multiply(mCamera.getTransformM());
 
 			MVstack.push();//light transforms --<
-				MVstack.translate(lightOne.getPosition());
+				//MVstack.translate(lightOne.getPositionV());
+				MVstack.multiply(lightOne.getTransformM());
 				glUniformMatrix4fv(locationMV, 1, GL_FALSE, MVstack.getCurrentMatrix());
 				lightT = glm::make_mat4(MVstack.getCurrentMatrix());
 				//glm::transpose(lightT);
@@ -82,7 +83,8 @@ int main(){
 			MVstack.pop(); //light transforms >--
 
 			MVstack.push();//sphere transforms --<
-				MVstack.translate(testSphere.getPosition());
+				MVstack.multiply(testSphere.getTransformM());
+			//	MVstack.translate(testSphere.getPositionV());
 				glUniformMatrix4fv(locationMV, 1, GL_FALSE, MVstack.getCurrentMatrix());
 				//glBindTexture(GL_TEXTURE_2D, greyTex.getTextureID());
 				testSphere.render();

@@ -1,6 +1,11 @@
 #include "Octant.h"
 #include <vector>
 #include "DynamicMesh.h"
+#include <glm/vec3.hpp> // glm::vec3
+#include <glm/vec4.hpp> // glm::vec4
+#include <glm/mat4x4.hpp> // glm::mat4
+#include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
+#include <glm/gtc/type_ptr.hpp> //glm::make:mat4
 
 
 
@@ -205,7 +210,7 @@ void Octant::render(MatrixStack* MVstack, GLint locationMV) {
 	}
 	else {
 		MVstack->push();
-			MVstack->translate(pos);
+//		MVstack->translate(glm::vec3(pos[0], pos[1], pos[2]));
 			glUniformMatrix4fv(locationMV, 1, GL_FALSE, MVstack->getCurrentMatrix());
 			//shape->render();
 		MVstack->pop();

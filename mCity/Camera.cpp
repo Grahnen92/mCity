@@ -24,14 +24,18 @@ void Camera::getPosition(glm::vec3& _Position)
 	_Position[2] = transform[3][2];
 }
 
-glm::vec3* Camera::getPosition()
+float* Camera::getPositionF()
 {
-	return &transform[3];
+	return &transform[3][0];
 }
 
-float* Camera::getTransform()
+float* Camera::getTransformF()
 {
 	return &transform[0][0];
+}
+glm::mat4* Camera::getTransformM()
+{
+	return &transform;
 }
 
 float* Camera::getPerspective()

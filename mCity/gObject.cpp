@@ -17,10 +17,16 @@ void gObject::getPosition(glm::vec3& _Position)
 	_Position[2] = transform[4][2];
 }
 
-float* gObject::getPosition()
+float* gObject::getPositionF()
 {
 	return &transform[3][0];
 }
+
+glm::vec3* gObject::getPositionV()
+{
+	return (glm::vec3*)(&transform[3]);
+}
+
 void gObject::setPosition(glm::vec3* _Position)
 { 
 	transform[0][3] = (*_Position)[0];
@@ -28,9 +34,14 @@ void gObject::setPosition(glm::vec3* _Position)
 	transform[2][3] = (*_Position)[2];
 }
 
-float* gObject::getTransform()
+float* gObject::getTransformF()
 { 
 	return &transform[0][0]; 
+}
+
+glm::mat4* gObject::getTransformM()
+{
+	return &transform;
 }
 void gObject::setRotation(glm::mat3* _Rotation)
 { 

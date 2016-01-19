@@ -7,9 +7,10 @@ public:
 	~Camera();
 
 	void getPosition(glm::vec3& _Position);
-	float* getPosition();
+	float* getPositionF();
 
-	float* getTransform();
+	float* getTransformF();
+	glm::mat4* getTransformM();
 	float* getPerspective();
 
 	void setPosition(glm::vec3* _Position);
