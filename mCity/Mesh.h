@@ -17,6 +17,7 @@ class Mesh
 {
 
 	friend class Sphere;
+	friend class Plane;
 
 public:
 	Mesh();
